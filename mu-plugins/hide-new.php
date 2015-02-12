@@ -5,8 +5,9 @@ function hide_add($hook){
     wp_enqueue_script( 'hide-theme', plugins_url('hide.js', __FILE__), 'jquery');
   }
 }
-function add-logo($hook){
+
+function add_logo($hook){
   wp_enqueue_script( 'add-logo', plugins_url('logo.js', __FILE__), 'jquery');
 }
 add_action('admin_enqueue_scripts', 'hide_add');
-add_action('wp_enqueue_scripts', 'add-logo');
+add_action('wp_enqueue_scripts', 'add_logo');
