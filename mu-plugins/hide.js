@@ -3,5 +3,6 @@
 */
 
 jQuery(function() {	
-	jQuery('#wpbody-content > div.wrap > h2').after('<div style="color:#990033;display:block;text-align:center">Warning: Changes made to your WordPress configuration will be lost. See our <a href="https://www.ng.bluemix.net/docs/#starters/wordpress/index.html">docs</a> for information on how to customize WordPress on Bluemix.</div>');
+	jQuery('#wpbody-content > div.wrap > h2').after('<div style="color:#990033;display:block;text-align:center">Warning: Changes made to your WordPress configuration will be lost. See our <a href="https://www.ng.bluemix.net/docs/#starters/wordpress/index.html">docs</a> for information on how to customize WordPress on Bluemix.</div>');;
+	jQuery('.site-info > a').after(" on bluemix");
 });
