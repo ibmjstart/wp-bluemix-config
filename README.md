@@ -1,4 +1,4 @@
-# wordpress-bp-config
+# wordpress-bluemix-config
 
 This Package contains files used for configuring the wordpress boilerplate on bluemix
 
