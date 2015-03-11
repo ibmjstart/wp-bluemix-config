@@ -15,6 +15,10 @@
  * @package WordPress
  */
 
+// enables WP_CACHE 
+define('WP_CACHE', true); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/home/vcap/app/htdocs/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 
