@@ -15,10 +15,6 @@
  * @package WordPress
  */
 
-// enables WP_CACHE 
-define('WP_CACHE', true); //Added by WP-Cache Manager
-define( 'WPCACHEHOME', '/home/vcap/app/htdocs/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
-
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 
@@ -98,7 +94,7 @@ if(!get_option('default_plugins_activated')){
 	update_option('default_plugins_activated', "1");
 	activate_plugin( 'wp-bluemix-objectstorage/objectstorage.php' );
 	activate_plugin( 'stops-core-theme-and-plugin-updates/main.php');
-	activate_plugin( 'wp-super-cache/wp-cache.php');
+	//activate_plugin( 'wp-super-cache/wp-cache.php');
 
 	if(!get_option('_disable_updates')){
   		update_option('_disable_updates', array(
