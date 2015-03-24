@@ -43,6 +43,8 @@ define( 'AUTOMATIC_UPDATER_DISABLED', true );
 /** Allow DB Repair*/
 define('WP_ALLOW_REPAIR', true);
 
+// Get rid of hello dolly
+define( ‘CORE_UPGRADE_SKIP_NEW_BUNDLED’, true);
 
 /**#@-*/
 
