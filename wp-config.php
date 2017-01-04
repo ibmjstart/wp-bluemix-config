@@ -21,6 +21,14 @@
 $vcap = getenv("VCAP_SERVICES");
 $data = json_decode($vcap, true);
 $creds = $data['cleardb'][0]['credentials'];
+if(!$creds && $data['compose-for-mysql']) {
+	$creds = $data['compose-for-mysql'][0]['credentials'];
+	$parsed = parse_url($creds['uri']);
+	$creds['name'] = str_replace('/', '', $parsed['path']);
+	$creds['username'] = $parsed['user'];
+	$creds['password'] = $parsed['pass'];
+	$creds['hostname'] = $parsed['host'].":".$parsed['port'];
+}
 define('DB_NAME', $creds['name']);
 
 /** MySQL database username */
