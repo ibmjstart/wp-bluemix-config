@@ -16,11 +16,41 @@
  */
 
 // ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
+/** The name of the database for WordPress 
+ *
+ *  compose.io format
+ *  mysql://USER:PASSWORD@COMPOSE_REGION:PORT/compose
+ *
+ *  parse_url breakdown ...
+ *    protocol:  mysql
+ *    user:  USER
+ *    pass:  PASSWORD
+ *    host:  COMPOSE_REGION
+ *    port:  PORT
+ *    path:  /compose
+ */
 
-$vcap = getenv("VCAP_SERVICES");
+$vcap = getenv('VCAP_SERVICES');
 $data = json_decode($vcap, true);
-$creds = $data['cleardb'][0]['credentials'];
+if (isset($data)) {
+  if (isset($data['cleardb'][0]['credentials'])) {
+    $creds = $data['cleardb'][0]['credentials'];
+  }
+
+  elseif (isset($data['user-provided'][0]['credentials'])) {
+    $rawcreds = $data['user-provided'][0]['credentials'];
+    $creds = parse_url($rawcreds['uri']);
+      if ($creds['scheme'] === 'mysql') {
+        // ** Normalizing expected keys to parseURL calculated values ** //
+        $creds['name'] = substr($creds['path'], 1);
+        $creds['username'] = $creds['user'];
+        $creds['password'] = $creds['pass'];
+        $creds['hostname'] = $creds['host'] . ':' . $creds['port'];
+      }
+  }
+
+}
+
 define('DB_NAME', $creds['name']);
 
 /** MySQL database username */
@@ -90,7 +120,7 @@ require_once ABSPATH.'/wp-admin/includes/plugin.php';
  * 		for WordPress on Bluemix.
  */
 if(!get_option('default_plugins_activated')){
-	update_option('default_plugins_activated', "1");
+	update_option('default_plugins_activated', '1');
 	activate_plugin( 'wp-bluemix-objectstorage/objectstorage.php' );
 	activate_plugin( 'stops-core-theme-and-plugin-updates/main.php');
 	//activate_plugin( 'wp-bluemix-sendgrid/bluemix-sendgrid.php');
