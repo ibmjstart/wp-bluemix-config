@@ -49,6 +49,18 @@ if (isset($data)) {
       }
   }
 
+  elseif (isset($data['compose-for-mysql'][0]['credentials'])) {
+    $rawcreds = $data['compose-for-mysql'][0]['credentials'];
+    $creds = parse_url($rawcreds['uri']);
+      if ($creds['scheme'] === 'mysql') {
+        // ** Normalizing expected keys to parseURL calculated values ** //
+        $creds['name'] = substr($creds['path'], 1);
+        $creds['username'] = $creds['user'];
+        $creds['password'] = $creds['pass'];
+        $creds['hostname'] = $creds['host'] . ':' . $creds['port'];
+      }
+  }
+
 }
 
 define('DB_NAME', $creds['name']);
